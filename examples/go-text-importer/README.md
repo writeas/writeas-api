@@ -17,7 +17,7 @@ Now run the utility by supplying your Write.as username, optional blog alias, an
 # import these files as anonymous posts
 writeas-import -u matt yesterday.md thismorning.md apoem.md
 
-# import all .txt files in this directory
+# import all .txt files in this directory as anonymous posts
 writeas-import -u matt *.txt
 
 # import all .txt files in this dir to matts-alter-ego blog
