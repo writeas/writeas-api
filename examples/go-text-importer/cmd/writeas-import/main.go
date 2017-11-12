@@ -12,13 +12,14 @@ import (
 func main() {
 	// Get parameters
 	u := flag.String("u", "", "Write.as username")
+	coll := flag.String("c", "", "Write.as collection to import to")
 	font := flag.String("font", "norm", "The font for the post (norm, sans, wrap, mono, code)")
 	flag.Parse()
 
 	// Validate parameters
 	args := flag.Args()
 	if *u == "" || len(args) == 0 {
-		fmt.Fprintf(os.Stderr, "usage: writeas-import -u username file1 [file2|file3...]\n")
+		fmt.Fprintf(os.Stderr, "usage: writeas-import -u username [-c blog] file1 [file2|file3...]\n")
 		os.Exit(1)
 	}
 
@@ -62,14 +63,19 @@ func main() {
 		// Publish post
 		fmt.Print("Publishing...")
 		p, err := c.CreatePost(&writeas.PostParams{
-			Title:   "",
-			Content: string(content),
-			Font:    *font,
+			Title:      "",
+			Content:    string(content),
+			Font:       *font,
+			Collection: *coll,
 		})
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "error publishing %s: %v\n", fn, err)
 			continue
 		}
-		fmt.Printf("Created post %s from %s\n", p.ID, fn)
+		if *coll != "" {
+			fmt.Printf("Created post %s from %s\n", p.Slug, fn)
+		} else {
+			fmt.Printf("Created post %s from %s\n", p.ID, fn)
+		}
 	}
 }
