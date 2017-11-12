@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"github.com/howeyc/gopass"
 	"github.com/writeas/go-writeas"
 	"io/ioutil"
 	"os"
@@ -11,14 +12,26 @@ import (
 func main() {
 	// Get parameters
 	u := flag.String("u", "", "Write.as username")
-	pass := flag.String("p", "", "Write.as password")
 	font := flag.String("font", "norm", "The font for the post (norm, sans, wrap, mono, code)")
 	flag.Parse()
 
 	// Validate parameters
 	args := flag.Args()
-	if *u == "" || *pass == "" || len(args) == 0 {
-		fmt.Fprintf(os.Stderr, "usage: writeas-import -u username -p password file1 [file2|file3...]\n")
+	if *u == "" || len(args) == 0 {
+		fmt.Fprintf(os.Stderr, "usage: writeas-import -u username file1 [file2|file3...]\n")
+		os.Exit(1)
+	}
+
+	// Get password
+	fmt.Print("Password: ")
+	pass, err := gopass.GetPasswdMasked()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "error reading pass: %v\n", err)
+		os.Exit(1)
+	}
+	// Validate password
+	if len(pass) == 0 {
+		fmt.Fprintf(os.Stderr, "Please enter your password.\n")
 		os.Exit(1)
 	}
 
@@ -27,7 +40,7 @@ func main() {
 
 	// Log user in
 	fmt.Print("Logging in...")
-	au, err := c.LogIn(*u, *pass)
+	au, err := c.LogIn(*u, string(pass))
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "error: %v\n", err)
 		os.Exit(1)

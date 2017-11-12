@@ -14,6 +14,6 @@ go get github.com/writeas/writeas-api/examples/go-text-importer/cmd/writeas-impo
 Now run the utility by supplying your Write.as credentials and the files you want to import to that account:
 
 ```bash
-writeas-import -u matt -p password yesterday.md thismorning.md apoem.md
-writeas-import -u matt -p password *.txt
+writeas-import -u matt yesterday.md thismorning.md apoem.md
+writeas-import -u matt *.txt
 ```
