@@ -1,0 +1,21 @@
+{
+  "name": "writeas-api-examples",
+  "description": "Example uses of the Write.as API.",
+  "author": "Matt Baer <matt@write.as> (https://write.as/matt/)",
+  "version": "1.0.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/writeas/writeas-api"
+  },
+  "bugs": {
+    "url": "https://github.com/writeas/writeas-api/issues"
+  },
+  "dependencies": {
+    "writeas": "0.x"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}
