@@ -22,7 +22,7 @@ class Collection {
   }
 
   getPosts() {
-    return this.client._req('get', `/collections/${this.alias}/posts`).then(a => a.posts.map(p => new _Post2.default(this.client, p)));
+    return this.client._req('get', `/collections/${this.alias}/posts?body=html`).then(a => a.posts.map(p => new _Post2.default(this.client, p)));
   }
 
   pinPost(post, position) {
