@@ -1,7 +1,7 @@
 Text file importer (Go)
 =======================
 
-A simple command-line utility for importing Markdown (or plain text) files into Write.as, writing in Go / golang.
+A simple command-line utility for importing Markdown (or plain text) files into Write.as, written in Go / golang.
 
 ## Getting Started
 
